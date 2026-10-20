@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>IAS 2 Midterm Practice Exam</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--tx:#1b1f2a;--mu:#5d6577;--ac:#2f5bea;--ok:#117a3d;--okb:#e2f6ea;--no:#b3261e;--nob:#fde8e6;--bd:#d9dde8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12141b;--card:#1b1e28;--tx:#e8eaf2;--mu:#98a0b5;--ac:#7c9bff;--ok:#6fdc9a;--okb:#16301f;--no:#ff8f86;--nob:#3a1b19;--bd:#2f3445}}
+:root[data-theme="dark"]{--bg:#12141b;--card:#1b1e28;--tx:#e8eaf2;--mu:#98a0b5;--ac:#7c9bff;--ok:#6fdc9a;--okb:#16301f;--no:#ff8f86;--nob:#3a1b19;--bd:#2f3445}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.w{max-width:720px;margin:0 auto;padding:16px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+h1{font-size:1.25rem;margin:0}
+a.rv{color:var(--ac);font-weight:600;cursor:pointer;text-decoration:underline}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:18px;margin-bottom:14px}
+.bar{height:8px;background:var(--bd);border-radius:4px;overflow:hidden;margin:8px 0}
+.bar i{display:block;height:100%;background:var(--ac);width:0}
+.meta{display:flex;justify-content:space-between;color:var(--mu);font-size:.9rem}
+.q{font-size:1.08rem;font-weight:600;margin:10px 0 14px}
+.o{display:block;width:100%;text-align:left;background:var(--card);color:var(--tx);border:1.5px solid var(--bd);border-radius:10px;padding:12px 14px;margin-bottom:8px;font:inherit;cursor:pointer}
+.o:hover:not(:disabled){border-color:var(--ac)}
+.o.ok{background:var(--okb);border-color:var(--ok)}.o.no{background:var(--nob);border-color:var(--no)}
+.o:disabled{cursor:default;color:var(--tx)}
+.fb{margin-top:10px;padding:12px;border-radius:10px;background:var(--bg);border:1px solid var(--bd);font-size:.95rem}
+.btn{background:var(--ac);color:#fff;border:0;border-radius:10px;padding:12px 20px;font:inherit;font-weight:600;cursor:pointer}
+:root:not([data-theme="light"]) .btn{color:#10131c}
+.btn.g{background:transparent;color:var(--ac);border:1.5px solid var(--ac)}
+#rev h3{margin:14px 0 4px;font-size:1rem;color:var(--ac)}#rev ul{margin:0;padding-left:20px}#rev li{margin:2px 0}
+.big{font-size:2.4rem;font-weight:700}.hid{display:none}
+.mi{border-top:1px solid var(--bd);padding:10px 0;font-size:.92rem}.mi b{display:block}
+</style></head><body><div class="w">
+<div class="top"><h1>🛡️ Information Assurance &amp; Security 2 — Midterm</h1><a class="rv" id="rvl">📖 Open Reviewer</a></div>
+
+<div id="rev" class="card hid"></div>
+
+<div id="start" class="card">
+<p><b id="cnt"></b> multiple-choice items covering Modules 1–6, with many situational questions. Questions and choices are shuffled every attempt. After each answer you’ll see the correct answer and why, then move on.</p>
+<button class="btn" id="go">Start exam</button></div>
+
+<div id="quiz" class="card hid">
+<div class="meta"><span id="pn"></span><span id="sc"></span></div><div class="bar"><i id="pb"></i></div>
+<div class="q" id="qt"></div><div id="op"></div><div id="fb"></div>
+<div style="margin-top:12px"><button class="btn hid" id="nx">Next →</button></div></div>
+
+<div id="end" class="card hid"><div class="big" id="fs"></div><p id="fm"></p>
+<button class="btn" id="re">Retake (reshuffled)</button> <button class="btn g" id="rm">Retry missed only</button>
+<div id="ms" style="margin-top:14px"></div></div>
+</div>
+<script>
+// [question, correct, wrong1, wrong2, wrong3, explanation]
+const B=[
+["Which element of information security ensures that only authorized people can access information?","Confidentiality","Integrity","Availability","Authenticity","Confidentiality restricts access to authorized parties."],
+["During an emergency, doctors cannot open patient files because the hospital server is down. Which security element is affected?","Availability","Confidentiality","Integrity","Non-repudiation","Availability means data is accessible when required."],
+["An employee quietly changes payroll figures in the database. Which element is violated?","Integrity","Confidentiality","Availability","Authenticity","Integrity is the trustworthiness of data; unauthorized changes break it."],
+["A customer claims they never sent an order, but signed logs prove they did. Which concept prevents such denial?","Non-repudiation","Availability","Confidentiality","Scanning","Non-repudiation means a sender cannot deny sending a message."],
+["A manager adds many new features to a system and the system becomes easier to attack. This reflects the relationship among:","Security, functionality, and usability","Integrity, availability, and authenticity","Tactics, techniques, and procedures","Passive, active, and close-in attacks","A system’s level of security depends on balancing restrictions, features, and GUI; more features/usability usually lowers security."],
+["An attacker silently captures network traffic without altering it. This is a:","Passive attack","Active attack","Close-in attack","Insider attack","Passive attacks intercept and monitor traffic without changing it."],
+["An attacker modifies data while it travels between two systems. This is a:","Active attack","Passive attack","Close-in attack","Distribution attack","Active attacks alter data in transit or disrupt services."],
+["A hacker sits in the same room as the target’s network equipment to attack it. Which attack class is this?","Close-in attack","Passive attack","Distributed attack","Phishing","Close-in attacks require physical proximity to the system or network."],
+["A trusted administrator misuses privileged access to harm the company. This is a(n):","Insider attack","Active attack","Passive attack","Close-in attack","Insider attacks use privileged access to violate rules or cause threats."],
+["Attackers tamper with hardware or software before it is delivered and installed. The module calls this a:","Distributed attack","Passive attack","Insider attack","Close-in attack","Tampering prior to installation is the distributed (distribution) attack."],
+["An employee copies confidential files onto a personal music player or USB using his access rights. This is called:","Pod-slurping","Phishing","Tailgating","Sniffing","Pod-slurping bypasses security using privileged access and portable devices."],
+["A user’s files are locked and a message demands an online payment to unlock them. This malware is:","Ransomware","Spyware","Adware","A rootkit","Ransomware restricts access and demands ransom."],
+["Thousands of infected computers are controlled remotely to flood a website. This network of compromised systems is a:","Botnet","Rootkit","Honeypot","Worm maker","A botnet is a large network of compromised systems used for attacks such as DDoS."],
+["A store accepts credit cards. Which standard governs how it must protect cardholder data?","PCI DSS","HIPAA","SOX","FISMA","PCI DSS applies to entities that handle payment card processing."],
+["A clinic in the U.S. stores patient records electronically. Which law protects personal health information?","HIPAA","PCI DSS","DMCA","SOX","HIPAA provides federal protection for personal health information."],
+["Under SOX, which title requires senior corporate officers to personally certify the accuracy of financial reports?","Title III – Corporate Responsibility","Title I – Oversight Board","Title II – Auditor Independence","Title X – Corporate Tax Returns","Title III covers corporate responsibility and officer certification."],
+["A company processes data of EU residents and fears heavy fines for violations. Which regulation applies?","GDPR","FISMA","HIPAA","DMCA","GDPR is called the most stringent privacy law and levies harsh fines."],
+["Which law requires federal agencies to develop and implement risk-based information security programs?","FISMA","GDPR","PCI DSS","SOX","FISMA targets federal agencies’ security programs."],
+["Which standard specifies requirements for establishing and continually improving an information security management system?","ISO/IEC 27001:2013","DMCA","HIPAA","SOX","ISO/IEC 27001 defines ISMS requirements."],
+["An attacker sends a malicious attachment to the victim by email. Which Cyber Kill Chain phase is this?","Delivery","Weaponization","Reconnaissance","Installation","Delivery sends the weaponized bundle to the victim."],
+["An attacker studies a company’s website and staff social media to learn about it. Which kill-chain phase is this?","Reconnaissance","Weaponization","Exploitation","Command and Control","Reconnaissance gathers data on the target."],
+["An attacker combines an exploit with a backdoor into a malicious PDF. This is:","Weaponization","Delivery","Exploitation","Installation","Weaponization creates a deliverable malicious payload."],
+["Malware on a victim PC opens a channel to its operator to receive instructions. Which phase?","Command and Control","Installation","Delivery","Action on Objectives","C2 creates a channel to communicate with the compromised system."],
+["Which is the correct order of the Cyber Kill Chain (RWDECA)?","Reconnaissance, Weaponization, Delivery, Exploitation, Installation, C2, Action on Objectives","Weaponization, Reconnaissance, Delivery, Installation, Exploitation, C2, Action on Objectives","Reconnaissance, Delivery, Weaponization, Exploitation, C2, Installation, Action on Objectives","Reconnaissance, Weaponization, Exploitation, Delivery, Installation, Action on Objectives, C2","The mnemonic RWDECA follows the order Reconnaissance → Weaponization → Delivery → Exploitation → Installation → C2 → Action."],
+["In TTPs, which refers to the technical methods an attacker uses?","Techniques","Tactics","Procedures","Indicators","Techniques are technical methods; tactics are guidelines; procedures are organizational approaches."],
+["A SOC analyst notices unusual outbound traffic to a known malicious IP used for command and control. This is a(n):","Network indicator of compromise","Email indicator","Host-based indicator","Natural threat","Network indicators help identify C2, malware delivery, and similar activity."],
+["While analyzing an infected workstation, an analyst finds suspicious new files and registry entries. These are:","Host-based indicators","Email indicators","Network indicators","Behavioral indicators only","Host-based indicators are found by analyzing the infected system."],
+["A pentester is hired with written permission to find vulnerabilities in a bank’s network. He is a:","White hat","Black hat","Suicide hacker","Script kiddie","White hats work for defensive purposes (security analysts)."],
+["A hacker sometimes works defensively and sometimes offensively. He is a:","Gray hat","White hat","Black hat","Hacktivist","Gray hats work both offensively and defensively."],
+["A teenager downloads a tool and runs it against a website without understanding how it works. He is a:","Script kiddie","State-sponsored hacker","Industrial spy","White hat","Script kiddies are unskilled hackers who run existing tools and scripts."],
+["A group defaces a government website to promote a political agenda. They are:","Hacktivists","Industrial spies","Script kiddies","White hats","Hacktivists promote a political agenda by hacking."],
+["A hacker brings down critical infrastructure for a cause and does not fear jail. He is a:","Suicide hacker","Gray hat","Script kiddie","Industrial spy","Suicide hackers are not worried about facing jail terms."],
+["A company hires someone to illegally spy on a competitor’s plans. This person is an:","Industrial spy","Hacktivist","State-sponsored hacker","Cyber terrorist","Industrial spies conduct corporate espionage."],
+["After breaking in, an attacker deletes logs to avoid detection. Which hacking phase is this?","Clearing tracks","Maintaining access","Gaining access","Scanning","Clearing tracks hides malicious acts."],
+["An attacker installs a backdoor so he can return to the system later. Which phase?","Maintaining access","Gaining access","Scanning","Reconnaissance","Maintaining access retains ownership of the system."],
+["An attacker uses a tool to find live hosts and open ports on a target network. Which phase?","Scanning","Reconnaissance","Gaining access","Clearing tracks","Scanning looks for specific information on the network."],
+["An attacker reads a company’s job postings and press releases without contacting it. This is:","Passive reconnaissance","Active reconnaissance","Scanning","Gaining access","Passive recon involves no direct interaction with the target."],
+["An attacker uses advanced search operators to find exposed login pages. This technique is:","Google hacking","Clickjacking","Drive-by download","DNS poisoning","Google hacking uses advanced operators to build complex queries."],
+["A flood destroys a company’s server room. Which threat source is this?","Natural","Unintentional","Intentional (internal)","Intentional (external)","Fire, floods, and power failures are natural threats."],
+["A fired employee deliberately sabotages company files. Which threat source?","Intentional – internal","Natural","Unintentional","Intentional – external","A disgruntled/fired employee is an internal intentional threat."],
+["A tiny Trojan covertly installs other malware on a PC without downloading it from elsewhere. It is a:","Dropper","Downloader","Crypter","Packer","Droppers covertly install malware; downloaders fetch it from the internet."],
+["Which malware component protects malware from being reverse-engineered or detected?","Crypter","Payload","Exploit","Downloader","A crypter protects malware from reverse engineers."],
+["A user just visits a normal-looking webpage and gets infected because of an unpatched browser. This is a:","Drive-by download","Spear-phishing","Chain letter","Shoulder surfing","Drive-by downloads exploit unpatched browsers on page visit."],
+["A user reads a trusted news site, but a malicious ad infects the PC. This is:","Malvertising","Clickjacking","Spam","Dumpster diving","Malvertising delivers malware through malicious ads."],
+["A PC is suspected to have a rootkit. What is the recommended countermeasure?","Reinstall the OS from trusted media","Clear the browser cache","Change the wallpaper","Disable the screensaver","For rootkits: reinstall the OS, use automated installs and a firewall."],
+["A user suspects a keylogger on a public computer. Which countermeasure helps?","Use an on-screen keyboard","Type faster","Use a larger monitor","Restart the router","On-screen keyboards, firewalls, antivirus, and pop-up blockers counter keyloggers."],
+["Malicious code runs only in memory through PowerShell, leaving no file on disk. This is:","Fileless malware","A rootkit","Adware","A worm maker","Fileless malware injects code into running processes such as PowerShell."],
+["Which countermeasure helps against fileless malware?","Disable PowerShell/Flash and use Group Policy","Install more browsers","Use weaker passwords","Enable all open ports","The module lists Group Policy and disabling Flash, PowerShell, and PDF readers."],
+["A free app shows endless pop-ups and tracks browsing cookies. This is:","Adware (a PUA)","Ransomware","A rootkit","A botnet","Adware generates unsolicited ads and tracks browsing patterns."],
+["A router still uses its factory username and password. Which vulnerability class is this?","Default password","Buffer overflow","Design flaw","Zero-day","Default passwords are supplied by the manufacturer and easily guessed."],
+["Attackers exploit a flaw the vendor does not yet know about. This is a:","Zero-day vulnerability","Misconfiguration","Default install","Unpatched server","A zero-day is unknown to the vendor, so no patch exists."],
+["A team uses Nessus and Qualys to find weaknesses. This is which type of assessment?","Automated assessment","Manual assessment","Non-credentialed only","Wireless only","Nessus, Qualys, and GFI LanGuard are automated tools."],
+["After a scan finds many problems, which should be fixed first?","The highest-risk vulnerabilities","The lowest-risk ones","The oldest systems","The newest systems","Remediation: fix the highest risk first."],
+["After patching a vulnerability, what is the next step?","Re-scan to verify the fix","Delete the report","Disable the scanner","Ignore it","Verification means re-scanning to confirm the fix."],
+["A scan logs in to every machine with valid accounts to check configuration in depth. It is a:","Credentialed assessment","Non-credentialed assessment","External assessment","Passive scan","Credentialed assessments obtain credentials for the machines."],
+["What is CVE?","A public list of standardized vulnerability identifiers","A password cracking tool","A DDoS tool","A malware type","CVE is a free, public dictionary of standardized identifiers."],
+["Windows stores passwords in the SAM database. How are they stored?","Hashed, never in clear text","In clear text","As screenshots","In the browser","Passwords are never stored in clear text in SAM."],
+["An attacker loads a word list and tries each word against a user account. This is a:","Dictionary attack","Brute-force attack","Pass-the-hash attack","Replay attack","Dictionary attacks load a dictionary file into the cracking tool."],
+["An attacker tries every possible character combination until the password is found. This is a:","Brute-force attack","Dictionary attack","Rule-based attack","Spoofing","Brute force tries every combination."],
+["An attacker copies the password file and cracks it on his own computer. This is an:","Offline attack","Active online attack","Passive online attack","Non-electronic attack","Offline attacks copy the password file and crack it elsewhere."],
+["A tool compares captured hashes against a precomputed table of hashes. This is a:","Rainbow table attack","Replay attack","Smurf attack","Tailgating","Rainbow tables use precomputed hashes."],
+["Which tool is based on rainbow tables and has a GUI?","Ophcrack","Wireshark","Macof","HOIC","Ophcrack uses rainbow tables and comes with a GUI."],
+["An attacker injects a stolen hash into a session to access network resources without cracking it. This is:","Pass-the-hash","Dictionary attack","Phishing","Smurf attack","Pass-the-hash validates network resources using a compromised hash."],
+["An attacker steals a Kerberos TGT from a user’s machine and uses it without the password. This is:","Pass-the-ticket","Pass-the-hash","Rainbow table attack","DNS poisoning","Pass-the-ticket authenticates to Kerberos without the password."],
+["An attacker captures authentication tokens with a sniffer and re-sends them later to gain access. This is a:","Replay attack","Brute-force attack","Rainbow table attack","DHCP starvation","Replay attacks capture tokens and reuse them."],
+["An attacker goes through a company’s trash to find documents. This is:","Dumpster diving","Shoulder surfing","Eavesdropping","Impersonation","Dumpster diving looks for valuable information in trash."],
+["A person watches you type your PIN from behind you in a café. This is:","Shoulder surfing","Eavesdropping","Dumpster diving","Phishing","Shoulder surfing is looking over someone’s shoulder."],
+["A stranger wearing a fake ID badge follows employees into a restricted area. This is:","Tailgating","Eavesdropping","Phishing","Scareware","In the module, tailgating involves a fake ID badge."],
+["An employee holds the door for a person who seems to be authorized, without realizing they are not. This is:","Piggybacking","Dumpster diving","Spear-phishing","Rainbow attack","Piggybacking: someone unintentionally lets an unauthorized person pass."],
+["An email appears to be from a bank and asks you to confirm your account details through a link. This is:","Phishing","Sniffing","Tailgating","Hijacking","Phishing sends illegitimate emails claiming to be from legitimate sites."],
+["The attacker presents himself as an authority so that the victim asks him for help. This is:","Reverse social engineering","Eavesdropping","Shoulder surfing","Piggybacking","Reverse social engineering makes the target seek help from the attacker."],
+["A pop-up warns of a ‘virus’ and pushes the user to buy a fake antivirus. This is:","Scareware","Dumpster diving","Pod-slurping","MAC flooding","Scareware tricks users with fear-based pop-ups."],
+["An employee bypasses security rules only to finish work faster and gets the company breached. This insider type is:","Negligent","Malicious","Professional","Compromised","Negligent insiders bypass controls for efficiency."],
+["A staff member sells confidential data to a competitor for money. This insider type is:","Professional insider","Negligent","Compromised","Natural","Professional insiders sell confidential information."],
+["Which tool is an anti-phishing community toolbar that gathers data on phishing sites with an open API?","PhishTank","Hping3","Macof","Ophcrack","PhishTank is a hub of phishing data with an open API."],
+["Which sniffing type works on a switch-based network and injects ARP packets?","Active sniffing","Passive sniffing","Offline sniffing","Reverse sniffing","Active sniffing injects ARP packets on switched networks; passive works through hubs."],
+["Which protocol sends passwords in clear text and is vulnerable to sniffing?","FTP","SSH","HTTPS","IPsec","FTP, HTTP, POP/IMAP, SMTP, and Telnet send data in clear text."],
+["An attacker floods a switch’s CAM table with fake MAC addresses so it broadcasts all traffic like a hub. This is:","MAC flooding","ARP spoofing","DHCP starvation","DNS poisoning","MAC flooding fills the CAM table; the switch then acts as a hub."],
+["Attackers send many fake DHCP requests until all IP addresses are used, and new users cannot connect. This is:","DHCP starvation","MAC spoofing","Smurf attack","Session hijacking","DHCP starvation exhausts the pool, causing denial of service."],
+["An attacker sends forged ARP replies to redirect a victim’s packets on the LAN. This is:","ARP spoofing","MAC flooding","Ping of Death","Phlashing","ARP spoofing sends forged ARP entries."],
+["Which countermeasure helps prevent sniffing of data in transit?","End-to-end encryption","Using Telnet","Broadcasting the SSID widely","Using clear-text protocols","Encryption makes sniffed data unreadable."],
+["Attackers send a large number of SYN requests with fake source IPs to a server. This is a:","SYN flood attack","Smurf attack","Ping of Death","Phlashing","SYN floods use many SYN requests with fake source addresses."],
+["Attackers spoof the victim’s IP and send many ICMP echo requests so replies flood the victim. This is a:","Smurf attack","SYN flood","Fragmentation attack","Replay attack","Smurf spoofs the source IP and uses ICMP echo."],
+["An attacker sends malformed or oversized packets with the ping command. This is the:","Ping of Death","Smurf attack","UDP flood","Phlashing","Ping of Death uses malformed/oversized ping packets."],
+["An attack sabotages hardware through fraudulent firmware updates, ‘bricking’ the device. This is:","Permanent DoS (Phlashing)","ICMP flood","SYN flood","DHCP starvation","Phlashing bricks hardware."],
+["Which tool is a command-line packet crafting and scanning tool used in DDoS?","Hping3","Wireshark","Ophcrack","PhishTank","Hping3 crafts packets from the command line."],
+["An attacker takes control of an existing valid TCP session between two hosts. This is:","Active session hijacking","Passive session hijacking","Spoofing","Dumpster diving","Active hijacking seizes control; passive only watches and records."],
+["What is the key difference between spoofing and hijacking?","Spoofing starts a new session with stolen credentials; hijacking seizes an existing session","Spoofing seizes an existing session; hijacking starts a new one","Both are identical","Spoofing is physical; hijacking is social","Per the module, spoofing initiates a new session; hijacking takes over an existing one."],
+["Which tool is an integrated penetration testing tool for finding vulnerabilities in web applications?","OWASP ZAP","Macof","HOIC","Rainbow Crack","OWASP ZAP is for web application testing."],
+["An admin pings a suspect machine with a wrong MAC address; if it replies, it may be sniffing. This is the:","Ping method of sniffer detection","DNS method","ARP method","Smurf method","A sniffer in promiscuous mode may answer the incorrect-MAC ping."]
+];
+const R=`<h3>Module 1 – Information Security</h3><ul><li>CIA + Authenticity; Non-repudiation = sender can’t deny sending</li><li>Security vs Functionality vs Usability – balance</li><li>Attacks: Passive, Active, Close-in, Insider, Distributed</li><li>Laws: PCI DSS, ISO/IEC 27001, HIPAA, SOX (11 titles), DMCA, FISMA, GDPR, DPA 2018; Pod-slurping</li></ul>
+<h3>Module 2 – Cybersecurity</h3><ul><li>Kill chain RWDECA: Recon, Weaponization, Delivery, Exploitation, Installation, C2, Action on Objectives</li><li>TTPs; IoC categories: Email, Network, Host-based, Behavioral</li><li>Hackers: Black, White, Gray, Suicide, Script kiddies; classes: cyber terrorist, state-sponsored, hacktivist, teams, industrial spies</li><li>Phases: Recon, Scanning, Gaining access, Maintaining access, Clearing tracks</li></ul>
+<h3>Module 3 – Threats</h3><ul><li>Sources: natural, unintentional, intentional (internal/external)</li><li>Malware components: Crypter, Downloader, Dropper, Exploit, Injector, Obfuscator, Packer, Payload</li><li>Types: Trojan, virus, ransomware, worm, rootkit, PUA/adware, spyware, keylogger, botnet, fileless</li><li>Vulnerability: remediation (highest risk first), verification (re-scan); CVE, NVD; scanning types</li></ul>
+<h3>Module 4 – Passwords</h3><ul><li>SAM, NTLM, Kerberos; attack types: non-electronic, active/passive online, offline</li><li>Dictionary, brute-force, rule-based, guessing, pass-the-hash, pass-the-ticket, replay, rainbow table</li><li>Tools: L0phtCrack, Ophcrack, RainbowCrack</li></ul>
+<h3>Module 5 – Social Engineering</h3><ul><li>Phases: research, select target, develop relationship, exploit</li><li>Human: impersonation, eavesdropping, shoulder surfing, dumpster diving, reverse SE, piggybacking, tailgating</li><li>Computer: pop-ups, hoax/chain letters, spam, scareware, phishing; Mobile: malicious apps</li><li>Insiders: malicious, negligent, professional, compromised; PhishTank, Netcraft</li></ul>
+<h3>Module 6 – Network-Level Attacks</h3><ul><li>Sniffing (passive vs active), vulnerable protocols (Telnet, HTTP, FTP, POP/IMAP, SMTP)</li><li>MAC flooding, DHCP starvation, ARP spoofing, MAC spoofing, DNS poisoning</li><li>DDoS: UDP/ICMP flood, Ping of Death, Smurf, SYN flood, Phlashing; tools Hping3, HOIC, LOIC</li><li>Session hijacking (active/passive); spoofing vs hijacking; OWASP ZAP</li></ul>`;
+const $=i=>document.getElementById(i);
+const sh=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+let Q=[],i=0,s=0,miss=[],done=false;
+$("cnt").textContent=B.length;$("rev").innerHTML="<b>📖 Reviewer – Midterm Notes</b>"+R;
+$("rvl").onclick=()=>{const r=$("rev");r.classList.toggle("hid");$("rvl").textContent=r.classList.contains("hid")?"📖 Open Reviewer":"✖ Close Reviewer"};
+function begin(pool){Q=sh(pool).map(x=>({q:x[0],c:x[1],o:sh([x[1],x[2],x[3],x[4]]),e:x[5],raw:x}));i=0;s=0;miss=[];
+["start","end"].forEach(k=>$(k).classList.add("hid"));$("quiz").classList.remove("hid");show()}
+function show(){done=false;const x=Q[i];$("pn").textContent="Question "+(i+1)+" of "+Q.length;$("sc").textContent="Score: "+s;
+$("pb").style.width=(i/Q.length*100)+"%";$("qt").textContent=x.q;$("fb").innerHTML="";$("nx").classList.add("hid");
+$("nx").textContent=i==Q.length-1?"See results":"Next →";const op=$("op");op.innerHTML="";
+x.o.forEach((t,k)=>{const b=document.createElement("button");b.className="o";b.textContent=String.fromCharCode(65+k)+". "+t;b.onclick=()=>pick(b,t);op.appendChild(b)})}
+function pick(b,t){if(done)return;done=true;const x=Q[i],ok=t===x.c;if(ok)s++;else miss.push(x.raw);
+[...$("op").children].forEach(e=>{e.disabled=true;const tx=e.textContent.slice(3);if(tx===x.c)e.classList.add("ok");else if(e===b)e.classList.add("no")});
+$("fb").innerHTML='<div class="fb"><b>'+(ok?"✅ Correct!":"❌ Incorrect.")+"</b> "+(ok?"":"Correct answer: <b>"+x.c+"</b>. ")+x.e+"</div>";
+$("sc").textContent="Score: "+s;$("nx").classList.remove("hid")}
+$("nx").onclick=()=>{i++;if(i<Q.length)show();else finish()};
+function finish(){$("quiz").classList.add("hid");$("end").classList.remove("hid");const p=Math.round(s/Q.length*100);
+$("fs").textContent=s+" / "+Q.length+" ("+p+"%)";$("fm").textContent=p>=90?"Excellent! You’re exam-ready.":p>=75?"Good job! Review the missed items below.":"Keep studying—open the reviewer and try again.";
+$("rm").classList.toggle("hid",!miss.length);
+$("ms").innerHTML=miss.length?"<b>Items to review:</b>"+miss.map(m=>'<div class="mi"><b>'+m[0]+"</b>Answer: "+m[1]+" — "+m[5]+"</div>").join(""):"<b>Perfect score—nothing to review!</b>"}
+$("go").onclick=()=>begin(B);$("re").onclick=()=>begin(B);$("rm").onclick=()=>begin(miss.slice());
+</script></body></html>
