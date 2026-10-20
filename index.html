@@ -29,9 +29,8 @@ a.rv{color:var(--ac);font-weight:600;cursor:pointer;text-decoration:underline}
 .big{font-size:2.4rem;font-weight:700}.hid{display:none}
 .mi{border-top:1px solid var(--bd);padding:10px 0;font-size:.92rem}.mi b{display:block}
 </style></head><body><div class="w">
-<div class="top"><h1>🛡️ Information Assurance &amp; Security 2 — Midterm</h1><a class="rv" id="rvl">📖 Open Reviewer</a></div>
+<div class="top"><h1>🛡️ Information Assurance &amp; Security 2 — Midterm</h1><a class="rv" href="https://docs.google.com/document/d/1yb5qxSIVx3lKr65IRnmFtlGSFrKVGeSkJED0NeQgctI/edit?tab=t.n3croep9goj2" target="_blank" rel="noopener">📖 Open Reviewer</a></div>
 
-<div id="rev" class="card hid"></div>
 
 <div id="start" class="card">
 <p><b id="cnt"></b> multiple-choice items covering Modules 1–6, with many situational questions. Questions and choices are shuffled every attempt. After each answer you’ll see the correct answer and why, then move on.</p>
@@ -140,17 +139,10 @@ const B=[
 ["Which tool is an integrated penetration testing tool for finding vulnerabilities in web applications?","OWASP ZAP","Macof","HOIC","Rainbow Crack","OWASP ZAP is for web application testing."],
 ["An admin pings a suspect machine with a wrong MAC address; if it replies, it may be sniffing. This is the:","Ping method of sniffer detection","DNS method","ARP method","Smurf method","A sniffer in promiscuous mode may answer the incorrect-MAC ping."]
 ];
-const R=`<h3>Module 1 – Information Security</h3><ul><li>CIA + Authenticity; Non-repudiation = sender can’t deny sending</li><li>Security vs Functionality vs Usability – balance</li><li>Attacks: Passive, Active, Close-in, Insider, Distributed</li><li>Laws: PCI DSS, ISO/IEC 27001, HIPAA, SOX (11 titles), DMCA, FISMA, GDPR, DPA 2018; Pod-slurping</li></ul>
-<h3>Module 2 – Cybersecurity</h3><ul><li>Kill chain RWDECA: Recon, Weaponization, Delivery, Exploitation, Installation, C2, Action on Objectives</li><li>TTPs; IoC categories: Email, Network, Host-based, Behavioral</li><li>Hackers: Black, White, Gray, Suicide, Script kiddies; classes: cyber terrorist, state-sponsored, hacktivist, teams, industrial spies</li><li>Phases: Recon, Scanning, Gaining access, Maintaining access, Clearing tracks</li></ul>
-<h3>Module 3 – Threats</h3><ul><li>Sources: natural, unintentional, intentional (internal/external)</li><li>Malware components: Crypter, Downloader, Dropper, Exploit, Injector, Obfuscator, Packer, Payload</li><li>Types: Trojan, virus, ransomware, worm, rootkit, PUA/adware, spyware, keylogger, botnet, fileless</li><li>Vulnerability: remediation (highest risk first), verification (re-scan); CVE, NVD; scanning types</li></ul>
-<h3>Module 4 – Passwords</h3><ul><li>SAM, NTLM, Kerberos; attack types: non-electronic, active/passive online, offline</li><li>Dictionary, brute-force, rule-based, guessing, pass-the-hash, pass-the-ticket, replay, rainbow table</li><li>Tools: L0phtCrack, Ophcrack, RainbowCrack</li></ul>
-<h3>Module 5 – Social Engineering</h3><ul><li>Phases: research, select target, develop relationship, exploit</li><li>Human: impersonation, eavesdropping, shoulder surfing, dumpster diving, reverse SE, piggybacking, tailgating</li><li>Computer: pop-ups, hoax/chain letters, spam, scareware, phishing; Mobile: malicious apps</li><li>Insiders: malicious, negligent, professional, compromised; PhishTank, Netcraft</li></ul>
-<h3>Module 6 – Network-Level Attacks</h3><ul><li>Sniffing (passive vs active), vulnerable protocols (Telnet, HTTP, FTP, POP/IMAP, SMTP)</li><li>MAC flooding, DHCP starvation, ARP spoofing, MAC spoofing, DNS poisoning</li><li>DDoS: UDP/ICMP flood, Ping of Death, Smurf, SYN flood, Phlashing; tools Hping3, HOIC, LOIC</li><li>Session hijacking (active/passive); spoofing vs hijacking; OWASP ZAP</li></ul>`;
 const $=i=>document.getElementById(i);
 const sh=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 let Q=[],i=0,s=0,miss=[],done=false;
-$("cnt").textContent=B.length;$("rev").innerHTML="<b>📖 Reviewer – Midterm Notes</b>"+R;
-$("rvl").onclick=()=>{const r=$("rev");r.classList.toggle("hid");$("rvl").textContent=r.classList.contains("hid")?"📖 Open Reviewer":"✖ Close Reviewer"};
+$("cnt").textContent=B.length;
 function begin(pool){Q=sh(pool).map(x=>({q:x[0],c:x[1],o:sh([x[1],x[2],x[3],x[4]]),e:x[5],raw:x}));i=0;s=0;miss=[];
 ["start","end"].forEach(k=>$(k).classList.add("hid"));$("quiz").classList.remove("hid");show()}
 function show(){done=false;const x=Q[i];$("pn").textContent="Question "+(i+1)+" of "+Q.length;$("sc").textContent="Score: "+s;
